@@ -1,0 +1,8 @@
+- hosts: all
+  become: yes
+  roles:
+  - docker
+  # - general_packages
+  # - dotfiles
+  # - asdf
+  # - kubernetes_tools

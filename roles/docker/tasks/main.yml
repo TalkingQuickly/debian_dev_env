@@ -1,0 +1,56 @@
+- name: Add required packages
+  package:
+    name:
+      - apt-transport-https
+      - ca-certificates 
+      - curl
+      - software-properties-common
+      - gnupg2
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: "Add Docker CE Repository"
+  apt_repository:
+    repo: deb https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
+    state: present
+    update_cache: true
+
+- name: 'Make sure the Docker directory exists'
+  file:
+    path: /etc/docker
+    state: directory
+
+- name: "Create docker Daemon configuration file"
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+
+- name: "Create docker systemd service"
+  file:
+    path: /etc/systemd/system/docker.service.d
+    state: directory
+
+- name: "Install docker packages"
+  package:
+    name:
+      - docker-ce
+      - docker-ce-cli 
+      - containerd.io
+
+- name: Ensure group "docker" exists
+  group:
+    name: docker
+    state: present
+
+- name: Restart service docker, in all cases
+  service:
+    name: docker
+    state: restarted
+
+- name: Ensure main user is in docker group
+  user:
+    name: "{{ main_user }}"
+    groups: docker
