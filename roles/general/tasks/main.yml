@@ -1,0 +1,48 @@
+- name: Add an Ansible apt key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 93C4A3FD7BB9C367
+
+- name: "Add Ansible Repository"
+  apt_repository:
+    repo: deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
+    state: present
+    update_cache: true
+
+- name: Install packages
+  package:
+    name:
+      - zsh
+      - vim
+      - tmux
+      - htop
+      - unzip
+      - build-essential
+      - autoconf 
+      - m4
+      - libncurses5-dev
+      - libwxgtk3.0-gtk3-dev
+      - libgl1-mesa-dev
+      - libglu1-mesa-dev 
+      - libpng-dev 
+      - libssh-dev 
+      - unixodbc-dev 
+      - xsltproc 
+      - fop 
+      - libxml2-utils 
+      - libncurses-dev 
+      - openjdk-11-jdk 
+      - libreadline-dev
+      - libpq-dev
+      - libmagickwand-dev
+
+- name: set the main users shell
+  user:
+    name: "{{ main_user }}"
+    shell: /usr/bin/zsh
+
+- name: Install Oh My ZSH
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  become: "{{ main_user }}"
+  args:
+    creates: "/home/{{ main_user }}/.oh-my-zsh"

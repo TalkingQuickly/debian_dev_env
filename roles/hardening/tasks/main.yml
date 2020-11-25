@@ -1,0 +1,14 @@
+- name: Install packages
+  package:
+    name:
+      - ufw
+
+- community.general.ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
+
+- name: Allow everything and enable UFW
+  community.general.ufw:
+    state: enabled
+    policy: deny
