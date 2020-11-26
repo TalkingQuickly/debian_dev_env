@@ -3,7 +3,7 @@
   roles:
   # - hardening
   # - docker
-  # - general
+  - general
   # - dotfiles
-  - asdf
+  # - asdf
   # - kubernetes_tools
