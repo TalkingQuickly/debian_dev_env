@@ -1,0 +1,27 @@
+- name: Copy .tmux.conf
+  copy:
+    src: ./dotfiles/.tmux.conf
+    dest: "/home/{{ main_user }}/.tmux.conf"
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"
+
+- name: Copy .zshrc
+  copy:
+    src: ./dotfiles/.zshrc
+    dest: "/home/{{ main_user }}/.zshrc"
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"
+
+- name: Copy .zshrc.personal.after
+  copy:
+    src: ./dotfiles/.zshrc.personal.after
+    dest: "/home/{{ main_user }}/.zshrc.personal.after"
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"
+
+- name: Copy .zshrc.personal.before
+  copy:
+    src: ./dotfiles/.zshrc.personal.before
+    dest: "/home/{{ main_user }}/.zshrc.personal.before"
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"

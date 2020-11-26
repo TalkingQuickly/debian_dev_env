@@ -1,0 +1,92 @@
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias zshc="vim ~/.zshrc.personal.after"
+alias reload!="source ~/.zshrc"
+alias gcm="git commit -m"
+alias hosts="sudo vim /etc/hosts"
+alias tmn='tmux new -s ${$(basename `pwd`)//./_}'
+alias tma='tmux attach -t'
+alias g="bundle exec guard"
+alias v="vim ."
+alias hosts="sudo vim /etc/hosts"
+alias vimc="vim ~/.vimrc.after"
+
+# Kubectl
+alias k="kubectl"
+alias kg="kubectl get"
+alias kd="kubectl describe"
+alias kl="kubectl logs"
+
+# Docker Compose
+alias dc="docker-compose"
+alias dcr="docker-compose run"
+alias dcrs"docker-compose run --service-ports"
+
+setopt AUTO_PUSHD
+DIRSTACKSIZE=9
+DIRSTACKFILE=~/.zdirs
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
+fi
+chpwd() {
+  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
+ 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '${HOME}/google-cloud-sdk/path.zsh.inc' ]; then source '${HOME}/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '${HOME}/google-cloud-sdk/completion.zsh.inc' ]; then source '${HOME}/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Docker compose shell completion
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+
+###-begin-graphql-completions-###
+#
+# yargs command completion script
+#
+# Installation: /usr/local/bin/graphql completion >> ~/.bashrc
+#    or /usr/local/bin/graphql completion >> ~/.bash_profile on OSX.
+#
+_yargs_completions()
+{
+    local cur_word args type_list
+
+    cur_word="${COMP_WORDS[COMP_CWORD]}"
+    args=("${COMP_WORDS[@]}")
+
+    # ask yargs to generate completions.
+    type_list=$(/usr/local/bin/graphql --get-yargs-completions "${args[@]}")
+
+    COMPREPLY=( $(compgen -W "${type_list}" -- ${cur_word}) )
+
+    # if no match was found, fall back to filename completion
+    if [ ${#COMPREPLY[@]} -eq 0 ]; then
+      COMPREPLY=( $(compgen -f -- "${cur_word}" ) )
+    fi
+
+    return 0
+}
+complete -F _yargs_completions graphql
+###-end-graphql-completions-###
+#
+
+export EDITOR='code --wait'
+
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit
+compinit
+
+PROMPT="%{$fg[cyan]%}$USER@%{$fg[blue]%}%m%} ${PROMPT}"
