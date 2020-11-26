@@ -30,6 +30,7 @@
   shell: |
     source /home/{{ main_user }}/.asdf/asdf.sh
     asdf install yarn latest
+    asdf install yarn 1.22.10
     asdf global yarn latest
     asdf reshim python
   become: "{{ main_user }}"
@@ -62,6 +63,7 @@
   shell: |
     source /home/{{ main_user }}/.asdf/asdf.sh
     asdf install ruby 2.7.2
+    asdf install ruby 2.6.4
     asdf global ruby 2.7.2
     gem install bundler -v 1.17.3
   become: "{{ main_user }}"
@@ -73,6 +75,7 @@
     source /home/{{ main_user }}/.asdf/asdf.sh
     bash /home/{{ main_user }}/.asdf/plugins/nodejs/bin/import-release-team-keyring
     asdf install nodejs 14.15.1
+    asdf install nodejs 12.18.4
     asdf global nodejs 14.15.1
   become: "{{ main_user }}"
   args:
@@ -82,6 +85,7 @@
   shell: |
     source /home/{{ main_user }}/.asdf/asdf.sh
     asdf install erlang 23.1
+    asdf install erlang 23.0.4
     asdf global erlang 23.1
   become: "{{ main_user }}"
   args:
