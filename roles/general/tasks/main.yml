@@ -3,6 +3,16 @@
     keyserver: keyserver.ubuntu.com
     id: 93C4A3FD7BB9C367
 
+- name: Adds gcloud key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Adds gcloud repos
+  apt_repository:
+    repo: "deb http://packages.cloud.google.com/apt cloud-sdk main"
+    update_cache: no
+
 - name: "Add Ansible Repository"
   apt_repository:
     repo: deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
@@ -35,6 +45,10 @@
       - libreadline-dev
       - libpq-dev
       - libmagickwand-dev
+      - apt-transport-https
+      - ca-certificates
+      - gnupg
+      - google-cloud-sdk
 
 - name: set the main users shell
   user:
