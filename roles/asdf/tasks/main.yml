@@ -19,8 +19,19 @@
     - ruby
     - elixir
     - nodejs
+    - yarn
     - python
     - erlang https://github.com/asdf-vm/asdf-erlang.git
+  become: "{{ main_user }}"
+  args:
+     executable: /bin/bash
+
+- name: "Install yarn"
+  shell: |
+    source /home/{{ main_user }}/.asdf/asdf.sh
+    asdf install yarn latest
+    asdf global yarn latest
+    asdf reshim python
   become: "{{ main_user }}"
   args:
      executable: /bin/bash

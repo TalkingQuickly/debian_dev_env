@@ -1,0 +1,5 @@
+- name: Download the phrase CLI
+  get_url:
+    url: https://github.com/phrase/phrase-cli/releases/download/2.0.15/phrase_linux_amd64
+    dest: /usr/local/bin/phrase
+    mode: a+x

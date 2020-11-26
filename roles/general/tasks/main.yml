@@ -70,3 +70,6 @@
     sudo rm awscliv2.zip
   args:
     creates: /usr/local/bin/aws
+
+- name: Increase inotify user limit
+  sysctl: name=fs.inotify.max_user_watches value=524288 sysctl_set=yes

@@ -1,9 +1,10 @@
 - hosts: all
   become: yes
   roles:
-  # - hardening
-  # - docker
+  - hardening
+  - docker
   - general
-  # - dotfiles
-  # - asdf
+  - dotfiles
+  - asdf
+  - phraseapp
   # - kubernetes_tools
