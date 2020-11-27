@@ -90,3 +90,8 @@ autoload -Uz compinit
 compinit
 
 PROMPT="%{$fg[cyan]%}$USER@%{$fg[blue]%}%m%} ${PROMPT}"
+
+# Make TMUX play nicely with SSH forwarding; https://werat.github.io/2017/02/04/tmux-ssh-agent-forwarding
+if [ -S "$SSH_AUTH_SOCK" ]; then
+    ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+fi
