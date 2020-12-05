@@ -66,6 +66,8 @@
     asdf install ruby 2.6.4
     asdf global ruby 2.7.2
     gem install bundler -v 1.17.3
+    gem install solargraph
+    gem install rubocop
   become: "{{ main_user }}"
   args:
      executable: /bin/bash
