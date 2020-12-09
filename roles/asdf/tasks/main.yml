@@ -9,7 +9,8 @@
     repo: 'https://github.com/asdf-vm/asdf.git'
     dest: ~/.asdf
     version: v0.8.0
-  become: "{{ main_user }}"
+  become_user: "{{ main_user }}"
+  become: yes
 
 - name: "Install asdf plugins"
   shell: |
@@ -22,7 +23,8 @@
     - yarn
     - python
     - erlang https://github.com/asdf-vm/asdf-erlang.git
-  become: "{{ main_user }}"
+  become_user: "{{ main_user }}"
+  become: yes
   args:
      executable: /bin/bash
 
@@ -33,7 +35,8 @@
     asdf install yarn 1.22.10
     asdf global yarn latest
     asdf reshim python
-  become: "{{ main_user }}"
+  become_user: "{{ main_user }}"
+  become: yes
   args:
      executable: /bin/bash
 
@@ -55,7 +58,8 @@
     pip3 install nose
     pip3 install scikit-learn
     asdf reshim python
-  become: "{{ main_user }}"
+  become_user: "{{ main_user }}"
+  become: yes
   args:
      executable: /bin/bash
 
@@ -68,7 +72,8 @@
     gem install bundler -v 1.17.3
     gem install solargraph
     gem install rubocop
-  become: "{{ main_user }}"
+  become_user: "{{ main_user }}"
+  become: yes
   args:
      executable: /bin/bash
 
@@ -79,7 +84,8 @@
     asdf install nodejs 14.15.1
     asdf install nodejs 12.18.4
     asdf global nodejs 14.15.1
-  become: "{{ main_user }}"
+  become_user: "{{ main_user }}"
+  become: yes
   args:
      executable: /bin/bash
 
@@ -89,7 +95,8 @@
     asdf install erlang 23.1
     asdf install erlang 23.0.4
     asdf global erlang 23.1
-  become: "{{ main_user }}"
+  become_user: "{{ main_user }}"
+  become: yes
   args:
      executable: /bin/bash
 
@@ -100,6 +107,7 @@
     asdf global elixir 1.11.2
     mix local.hex --force
     mix archive.install hex phx_new 1.5.7 --force
-  become: "{{ main_user }}"
+  become_user: "{{ main_user }}"
+  become: yes
   args:
      executable: /bin/bash

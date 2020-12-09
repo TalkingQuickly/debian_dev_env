@@ -30,6 +30,7 @@
       - build-essential
       - autoconf 
       - m4
+      - git
       - libncurses5-dev
       - libwxgtk3.0-gtk3-dev
       - libgl1-mesa-dev
@@ -50,6 +51,18 @@
       - gnupg
       - google-cloud-sdk
 
+- name: Add the main user
+  user:
+    name: "{{ main_user }}"
+    comment: John Doe
+    group: sudo
+
+- name: Allow the main user to login via SSH
+  ansible.posix.authorized_key:
+    user: "{{ main_user }}"
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
 - name: set the main users shell
   user:
     name: "{{ main_user }}"
@@ -57,7 +70,8 @@
 
 - name: Install Oh My ZSH
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-  become: "{{ main_user }}"
+  become: yes
+  become_user: "{{ main_user }}"
   args:
     creates: "/home/{{ main_user }}/.oh-my-zsh"
 
