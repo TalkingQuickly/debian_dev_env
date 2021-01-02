@@ -1,0 +1,26 @@
+- name: Add kubectl repo apt key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add helm repo apt key
+  apt_key:
+    url: https://baltocdn.com/helm/signing.asc
+    state: present
+
+- name: Add kubectl repo
+  apt_repository:
+    repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+    update_cache: no
+
+- name: Add helm repo
+  apt_repository:
+    repo: "deb https://baltocdn.com/helm/stable/debian/ all main"
+    update_cache: yes
+
+- name: Install Kubectl, kubectx and helm
+  package:
+    name: 
+      - kubectl
+      - helm
+      - kubectx

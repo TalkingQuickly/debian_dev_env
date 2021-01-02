@@ -1,5 +1,31 @@
+# In a minimal Debian install, sudo won't be available, so we first
+# install that and make sure the user ansible connects to has access
+# to it
+- hosts: all
+  become: yes 
+  become_method: su
+  pre_tasks:
+  - name: Install sudo if not there
+    raw: |
+      test -e /usr/bin/sudo || apt install -y sudo
+    become: yes
+    become_user: root
+    register: output
+    changed_when: output.stdout|trim() != ""
+  
+  - name: Ensure ansible user is in sudoers group
+    user:
+      append: yes
+      name: "{{ ansible_user }}"
+      groups: sudo
+
+# Some tasks will fail if run directly as root (e.g. with `su` so once)
+# we have sudo installed above, we switch back to it before doing the
+# actual work
 - hosts: all
   become: yes
+  become_method: sudo
+
   roles:
   - hardening
   - docker
@@ -7,4 +33,4 @@
   - dotfiles
   - asdf
   - phraseapp
-  # - kubernetes_tools
+  - kubernetes_tools

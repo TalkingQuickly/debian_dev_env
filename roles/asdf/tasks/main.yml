@@ -92,9 +92,8 @@
 - name: "Install default erlang"
   shell: |
     source /home/{{ main_user }}/.asdf/asdf.sh
-    asdf install erlang 23.1
-    asdf install erlang 23.0.4
-    asdf global erlang 23.1
+    asdf install erlang 23.2.1
+    asdf global erlang 23.2.1
   become_user: "{{ main_user }}"
   become: yes
   args:

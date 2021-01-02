@@ -22,39 +22,40 @@
 - name: Install packages
   package:
     name:
-      - zsh
-      - vim
-      - tmux
-      - htop
-      - unzip
-      - build-essential
-      - autoconf 
-      - m4
-      - git
-      - libncurses5-dev
-      - libwxgtk3.0-gtk3-dev
-      - libgl1-mesa-dev
-      - libglu1-mesa-dev 
-      - libpng-dev 
-      - libssh-dev 
-      - unixodbc-dev 
-      - xsltproc 
-      - fop 
-      - libxml2-utils 
-      - libncurses-dev 
-      - openjdk-11-jdk 
-      - libreadline-dev
-      - libpq-dev
-      - libmagickwand-dev
       - apt-transport-https
+      - autoconf 
+      - build-essential
       - ca-certificates
+      - direnv
+      - fop 
+      - git
       - gnupg
       - google-cloud-sdk
+      - htop
+      - libgl1-mesa-dev
+      - libglu1-mesa-dev 
+      - libmagickwand-dev
+      - libncurses-dev 
+      - libncurses5-dev
+      - libpng-dev 
+      - libpq-dev
+      - libreadline-dev
+      - libssh-dev 
+      - libwxgtk3.0-gtk3-dev
+      - libxml2-utils 
+      - m4
+      - openjdk-11-jdk 
+      - sudo
+      - tmux
+      - unixodbc-dev 
+      - unzip
+      - vim
+      - xsltproc 
+      - zsh
 
 - name: Add the main user
   user:
     name: "{{ main_user }}"
-    comment: John Doe
     group: sudo
 
 - name: Allow the main user to login via SSH
