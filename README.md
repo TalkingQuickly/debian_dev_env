@@ -41,10 +41,10 @@ and save it as something like `inventory.dev.yml`.
 Then run:
 
 ```
-ansible-playbook -i inventory.local_dev.yml main.yml --ask-become-pass
+ansible-playbook -i inventory.dev.yml main.yml --ask-become-pass
 ```
 
-And enter the root or sudo password for remote machine when prompted for "ASK Password".
+And enter the root or sudo password for remote machine when prompted for "ASK Password". This playbook currently assumes that the root and sudo passwords are the same.
 
 Then just wait and enjoy!
 
