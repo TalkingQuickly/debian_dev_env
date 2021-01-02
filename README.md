@@ -11,6 +11,16 @@ The driver behind this style of development has been:
 1. Greatly improved Docker performance, especially when dealing with large numbers of small files
 1. The ability to easily switch between different machines for development, e.g. to upgrade to a high powered remote server when needed
 
+## Prerequisites
+
+Ansible must be [installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html). This is often as simple as `pip3 install ansible`.
+
+And then dependent roles and collections must be fetched with:
+
+```
+ansible-galaxy install -r requirements.yml
+```
+
 ## Usage
 
 Ensure that you have SSH access to the target VM and that your SSH public key is in authorized keys, e.g:
