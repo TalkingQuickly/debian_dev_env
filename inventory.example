@@ -1,0 +1,6 @@
+all:
+  hosts:
+    "SSH_HOST":
+      ansible_user: SSH_USERNAME
+      main_user: DESIRED_LOGIN_USER
+      ansible_ssh_port: SSH_PORT
