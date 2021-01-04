@@ -1,3 +1,4 @@
 inventory.ini
 inventory.yml
 inventory.*.yml
+.DS_Store

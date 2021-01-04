@@ -45,6 +45,7 @@
       - libxml2-utils 
       - m4
       - openjdk-11-jdk 
+      - rsync
       - sudo
       - tmux
       - unixodbc-dev 
