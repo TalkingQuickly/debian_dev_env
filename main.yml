@@ -4,14 +4,21 @@
 - hosts: all
   become: yes 
   become_method: su
+  become_user: root
+
   pre_tasks:
   - name: Install sudo if not there
     raw: |
       test -e /usr/bin/sudo || apt install -y sudo
-    become: yes
-    become_user: root
     register: output
     changed_when: output.stdout|trim() != ""
+
+  - name: Allow ansible user to have passwordless sudo
+    lineinfile:
+      dest: /etc/sudoers
+      state: present
+      regexp: "^{{ ansible_user }}"
+      line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
   
   - name: Ensure ansible user is in sudoers group
     user:
