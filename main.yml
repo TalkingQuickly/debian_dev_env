@@ -7,24 +7,9 @@
   become_user: root
 
   pre_tasks:
-  - name: Install sudo if not there
-    raw: |
-      test -e /usr/bin/sudo || apt install -y sudo
-    register: output
-    changed_when: output.stdout|trim() != ""
-
-  - name: Allow ansible user to have passwordless sudo
-    lineinfile:
-      dest: /etc/sudoers
-      state: present
-      regexp: "^{{ ansible_user }}"
-      line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+    - include_role:
+        name: sudo
   
-  - name: Ensure ansible user is in sudoers group
-    user:
-      append: yes
-      name: "{{ ansible_user }}"
-      groups: sudo
 
 # Some tasks will fail if run directly as root (e.g. with `su` so once)
 # we have sudo installed above, we switch back to it before doing the
