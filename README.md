@@ -44,6 +44,7 @@ all:
       ansible_user: SSH_USER_NAME
       main_user: DESIRED_DEV_USER_NAME
       ssh_port: SSH_PORT
+      initial_become_method: su # this should be `su` if the SSH user does not, by default have sudo access, otherwise this should be `sudo`
 ```
 
 and save it as something like `inventory.dev.yml`.

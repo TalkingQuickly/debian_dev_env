@@ -4,3 +4,4 @@ all:
       ansible_user: SSH_USERNAME
       main_user: DESIRED_LOGIN_USER
       ansible_ssh_port: SSH_PORT
+      initial_become_method: su # this should be `su` if the SSH user does not, by default have sudo access, otherwise this should be `sudo`

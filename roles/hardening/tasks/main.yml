@@ -7,12 +7,13 @@
     name:
       - ufw
 
-- community.general.ufw:
+- name: Allow rate limited connections to SSH
+  community.general.ufw:
     rule: limit
     port: ssh
     proto: tcp
 
-- name: Deny everything and enable UFW
+- name: Deny everything else and enable UFW
   community.general.ufw:
     state: enabled
     policy: deny

@@ -3,7 +3,7 @@
 # to it
 - hosts: all
   become: yes 
-  become_method: su
+  become_method: "{{ initial_become_method }}"
   become_user: root
 
   pre_tasks:
