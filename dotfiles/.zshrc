@@ -24,6 +24,9 @@ if [ -f ~/.zshrc.personal.before ]; then . ~/.zshrc.personal.before; fi
 # Load Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
+# Load direnv
+eval "$(direnv hook zsh)"
+
 # Load personal ZSH config which should be stored in ~/.zshrc.personal.after
 # Most ZSH config e.g. aliases etc goes here
 if [ -f ~/.zshrc.personal.after ]; then . ~/.zshrc.personal.after; fi

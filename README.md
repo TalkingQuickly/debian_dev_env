@@ -11,6 +11,8 @@ The driver behind this style of development has been:
 1. Greatly improved Docker performance, especially when dealing with large numbers of small files
 1. The ability to easily switch between different machines for development, e.g. to upgrade to a high powered remote server when needed
 
+For more details on how to use this repo, see here: <https://www.talkingquickly.co.uk/2021/01/debian-dev-environment-for-remote-vscode/>
+
 ## Prerequisites
 
 Ansible must be [installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html). This is often as simple as `pip3 install ansible`.

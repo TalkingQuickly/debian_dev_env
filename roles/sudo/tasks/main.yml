@@ -4,6 +4,10 @@
   register: output
   changed_when: output.stdout|trim() != ""
 
+- name: Ensure we have setfacl (provided by acl) installed for Ansible unprivileged operations
+  package:
+    name: acl
+
 - name: Allow ansible user to have passwordless sudo
   lineinfile:
     dest: /etc/sudoers
