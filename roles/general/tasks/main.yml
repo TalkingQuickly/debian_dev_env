@@ -27,6 +27,7 @@
       - build-essential
       - ca-certificates
       - direnv
+      - dnsutils
       - fop 
       - git
       - gnupg
