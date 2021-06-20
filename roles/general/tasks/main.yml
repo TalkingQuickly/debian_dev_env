@@ -19,6 +19,26 @@
     state: present
     update_cache: true
 
+- name: Adds Github CLI key
+  apt_key:
+    url: https://cli.github.com/packages/githubcli-archive-keyring.gpg
+    state: present
+
+- name: "Add Github CLI Repo"
+  apt_repository:
+    repo: deb https://cli.github.com/packages stable main
+    state: present
+    update_cache: true
+
+- name: Install packages
+  package:
+    name:
+      - apt-transport-https
+      - autoconf 
+      - build-essential
+      - ca-certificates
+      - direnv
+
 - name: Install packages
   package:
     name:
@@ -29,6 +49,7 @@
       - direnv
       - dnsutils
       - fop 
+      - gh
       - git
       - gnupg
       - google-cloud-sdk
@@ -65,6 +86,10 @@
     user: "{{ main_user }}"
     state: present
     key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  with_first_found:
+    - files:
+        - ~/.ssh/id_rsa.pub
+      skip: true
 
 - name: set the main users shell
   user:
